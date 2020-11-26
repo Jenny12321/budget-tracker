@@ -1,0 +1,13 @@
+.expenses-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.expenses-page .basic-info-pane {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    min-height: 6rem;
+    margin-bottom: 4rem;
+}

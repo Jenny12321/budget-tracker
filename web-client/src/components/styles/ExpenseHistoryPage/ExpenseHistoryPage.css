@@ -1,0 +1,38 @@
+.expense-history-page .year-selector {
+    height: 4rem;
+    width: 30vw;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expense-history-page .selected-year {
+    width: 30vw;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    background-color: var(--milk-white); /*#F2F2F2*/
+}
+
+.expense-history-page .carousel-control-prev {
+    margin-left: -200px;
+    color: var(--grey); /*#6C757D*/
+}
+
+.expense-history-page .carousel-control-next {
+    margin-right: -200px;
+    color: var(--grey); /*#6C757D*/
+}
+
+.expense-history-page .period-selection-grid {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}

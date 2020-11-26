@@ -1,0 +1,17 @@
+.transactions-container {
+    background-color: var(--milk-white); /*#F2F2F2*/
+    min-height: 25vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 6px -6px var(--dark-blue); /*#163172*/
+    padding: 2rem 3rem 2.5rem 3rem;
+}
+
+.transactions-container .title {
+    padding-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.transactions-container .transactions {
+    min-height: 60vh;
+}

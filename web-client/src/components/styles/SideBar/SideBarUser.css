@@ -1,0 +1,17 @@
+.sidebar-user {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-user .user-fullname {
+    margin: 1.3rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.sidebar-user .user-image {
+    color: var(--grey);
+}

@@ -1,0 +1,17 @@
+.add-transaction-dialog .react-datepicker-wrapper {
+    display: block;
+}
+
+.add-transaction-dialog .transaction-date-picker {
+    display: block;
+    border: 1px solid var(--light-grey); /*#CED4DA*/
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+}
+
+.add-transaction-dialog .transaction-time-picker {
+    display: block;
+    border: 1px solid var(--light-grey); /*#CED4DA*/
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+}

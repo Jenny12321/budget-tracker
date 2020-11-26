@@ -1,0 +1,38 @@
+.expenses-info-container .carousel-control-prev {
+    width: 3rem;
+    color: var(--grey); /*#6C757D*/
+}
+
+.expenses-info-container .carousel-control-next {
+    width: 3rem;
+    color: var(--grey); /*#6C757D*/
+}
+
+.expenses-info-container .carousel-indicators > li {
+    background-color: var(--grey); /*#6C757D*/
+}
+
+.expenses-info-content {
+    background-color: var(--milk-white); /*#F2F2F2*/
+    min-height: 25vh;
+    border-radius: 12px;
+    box-shadow: 0 8px 6px -6px var(--dark-blue); /*#163172*/
+    padding: 2rem 3rem 2.5rem 3rem;
+    margin-bottom: 3rem;
+}
+
+.expenses-info-content .category-title {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.expenses-info-content .expenses-info-cards {
+    background-color: var(--milk-white); /*#F2F2F2*/
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 2rem;
+    min-height: inherit;
+}

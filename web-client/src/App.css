@@ -1,0 +1,28 @@
+:root {
+    --light-blue:  #D6E4F0;
+    --blue:  #46B3E6;
+    --dark-blue: #163172;
+    --royal-blue: #1E56A0;
+    --milk-white: #F2F2F2;
+    --grey: #6C757D;
+    --dark-grey: #393939;
+    --light-grey: #CED4DA;
+    --red: #B50000;
+    --pure-white: #FFFFFF;
+    --pure-black: #000000;
+}
+
+.App {
+    display: flex;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    background: var(--light-blue);
+}

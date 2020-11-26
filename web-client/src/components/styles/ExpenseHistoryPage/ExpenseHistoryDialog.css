@@ -1,0 +1,14 @@
+.expense-history-dialog .modal-content {
+    background-color: var(--light-blue); /*#D6E4F0*/
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.expense-history-dialog .basic-info-pane {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    min-height: 6rem;
+    margin-bottom: 4rem;
+}
+

@@ -1,0 +1,9 @@
+.sidebar-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-navigation .nav {
+    width: 100%;
+}

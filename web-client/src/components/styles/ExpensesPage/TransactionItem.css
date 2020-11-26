@@ -1,0 +1,58 @@
+.transaction-item {
+    display: grid;
+    grid-template-columns: 55% 15% 15% 7.5% 7.5%; /* 8fr 2fr 1fr 1fr 1fr */
+    min-height: 6rem;
+    background-color: #DCE0E5;
+    align-items: center;
+    padding: 1rem 0;
+    border-radius: 12px;
+    margin-top: 0.8rem;
+    box-shadow: inset 0 -10px 10px -10px var(--dark-blue); /*#163172*/
+}
+
+.transaction-item .transaction-item-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding-left: 2rem;
+}
+
+.transaction-item .transaction-item-day {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.transaction-item .transaction-item-cost {
+    align-self: center;
+    justify-self: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.transaction-item .transaction-item-icon-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction-item .transaction-item-icon-container.divider {
+    border-left: 1px solid var(--pure-black); /*#000000*/
+}
+
+.transaction-item .transaction-item-icon-container .transaction-item-icon {
+    padding: 0;
+    transition: color 0.1s ease-in-out;
+}
+
+.transaction-item .transaction-item-icon-container .transaction-item-icon.edit-icon {
+    color: var(--royal-blue); /*#1e56a0*/
+}
+
+.transaction-item .transaction-item-icon-container .transaction-item-icon.edit-icon:hover {
+    color: var(--blue); /*#46B3E6*/
+}
+
+.transaction-item .transaction-item-icon-container .transaction-item-icon.trash-icon:hover {
+    color: var(--red); /*#b50000*/
+}

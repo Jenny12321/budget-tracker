@@ -1,0 +1,6 @@
+.mainbody {
+    height: 100%;
+    background-color: var(--light-blue); /*#D6E4F0*/
+    width: 100%;
+    padding: 4rem 12rem;
+}

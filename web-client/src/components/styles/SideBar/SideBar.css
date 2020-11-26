@@ -1,0 +1,38 @@
+.sidebar {
+    height: 100%;
+    width: 250px;
+    min-width: 250px;
+    float: left;
+}
+
+.sidebar-content {
+    height: 100%;
+    width: inherit;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: var(--milk-white); /*#F2F2F2*/
+}
+
+.sidebar .logo {
+    padding: 3rem 1rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.sidebar .logout {
+    position: fixed;
+    bottom: 0;
+    width: inherit;
+    padding: 1rem 0;
+    text-align: center;
+    background-color: var(--light-grey);
+    transition: font-weight 0.2s ease-in-out, color 0.1s ease-in-out;
+}
+
+.sidebar .logout:hover {
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+}

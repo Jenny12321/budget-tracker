@@ -1,0 +1,46 @@
+.basic-info-card {
+    background-color: var(--milk-white); /*#F2F2F2*/
+    border-radius: 12px;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding: 1rem 1.3rem;
+    align-items: center;
+    box-shadow: 0 8px 6px -6px var(--dark-blue); /*#163172*/
+    transition: all 0.2s ease;
+}
+
+.basic-info-card .basic-info-card-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.basic-info-card .basic-info-card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--grey); /*#6C757D*/
+}
+
+.basic-info-card .left {
+    text-align: left !important;
+}
+
+.basic-info-card .center {
+    text-align: center !important;
+}
+
+.basic-info-card .right {
+    text-align: right !important;
+}
+
+.basic-info-card.clickable:hover {
+    cursor: pointer;
+    user-select: none;
+    transform: scale(1.04);
+}
+
+.basic-info-card.disabled {
+    background-color: var(--light-grey);
+    color: gray;
+    box-shadow: 0 8px 6px -6px var(--dark-grey);
+    user-select: none;
+}

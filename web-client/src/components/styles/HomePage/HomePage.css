@@ -1,0 +1,17 @@
+.home-page {
+    padding-top: 5%;
+}
+
+.home-page .home-page-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 3fr;
+    justify-items: center;
+    gap: 2rem;
+    margin: 0 1rem;
+}
+
+.home-page .navigation-item-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+}

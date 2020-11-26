@@ -1,0 +1,3 @@
+function BudgetItem() {
+    this.title = '';
+}

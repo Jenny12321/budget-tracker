@@ -1,0 +1,31 @@
+.search-filter {
+    width: 40vw;
+    min-width: 15vw;
+    float: left;
+}
+
+.search-filter.small {
+    width: 35vw !important;
+}
+
+.search-filter .input-group > input {
+    display: block;
+    background-color: var(--pure-white); /*#FFFFFF*/
+    border: 2px solid var(--grey); /*#6C757D*/
+    padding: 1rem;
+    outline: none !important;
+    border-radius: 2rem;
+    color: #292929;
+    transition: border-color 100ms linear;
+}
+
+.search-filter .input-group > input:focus {
+    box-shadow: none !important;
+    border-color: var(--blue); /*#46B3E6*/
+}
+
+.search-filter .input-group .btn {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: none !important;
+}

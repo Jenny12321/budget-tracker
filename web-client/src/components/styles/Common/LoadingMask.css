@@ -1,0 +1,19 @@
+.loading-mask-dialog .loading-mask-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.loading-mask-dialog .modal-dialog {
+    justify-content: center;
+}
+
+.loading-mask-dialog .modal-content {
+    background-color: var(--light-blue);
+    width: 65%;
+    border-radius: 2rem;
+    opacity: 0.8;
+}
