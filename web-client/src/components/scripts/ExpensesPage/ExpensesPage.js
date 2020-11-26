@@ -114,7 +114,7 @@ class ExpensesPage extends Component {
                         effectiveStart: effectiveStart,
                         effectiveEnd: effectiveEnd,
                         daysLeft: daysLeft,
-                        totalTransactions: 0
+                        totalTransactions: totalTransactions
                     });
                 }
             }
