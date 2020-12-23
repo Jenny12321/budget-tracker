@@ -36,10 +36,10 @@ namespace BudgetTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BudgetTrackerContext>(opts => opts.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<BudgetTrackerContext>(opts => opts.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            /*
-            services.AddEntityFrameworkNpgsql().AddDbContext<BudgetTrackerContext>(opts =>
+            
+            services.AddDbContext<BudgetTrackerContext>(opts =>
             {
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
@@ -71,7 +71,7 @@ namespace BudgetTracker
                 opts.UseNpgsql(connectionStr);
             });
 
-            */
+            
 
             services.Configure<CookiePolicyOptions>(options =>
             {
