@@ -105,7 +105,7 @@ namespace BudgetTracker
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.WithOrigins("http://127.0.0.1:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+                c.AddPolicy("AllowSpecificOrigin", options => options.WithOrigins("http://127.0.0.1:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             });
 
             services.AddMvc();
@@ -140,11 +140,11 @@ namespace BudgetTracker
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => options.WithOrigins("http://127.0.0.1:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthentication();
 
