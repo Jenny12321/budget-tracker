@@ -16,9 +16,7 @@ namespace BudgetTracker
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-            host.Services.InitializeDb();
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -27,41 +25,5 @@ namespace BudgetTracker
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-    }
-
-    public interface IDbInitializer
-    {
-        void Initialize();
-    }
-    public class DbInitializer : IDbInitializer
-    {
-        private readonly IServiceScopeFactory _scopeFactory;
-
-        public DbInitializer(IServiceScopeFactory scopeFactory)
-        {
-            _scopeFactory = scopeFactory;
-        }
-        public void Initialize()
-        {
-            using (var serviceScope = _scopeFactory.CreateScope())
-            {
-                using (var context = serviceScope.ServiceProvider.GetRequiredService<BudgetTrackerContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
-        }
-    }
-    public static class DbContextOptionsExtensions
-    {
-        public static void InitializeDb(this IServiceProvider serviceProvider)
-        {
-            var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
-            using (var scope = scopeFactory.CreateScope())
-            {
-                var dbInitialize = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-                dbInitialize.Initialize();
-            }
-        }
     }
 }
