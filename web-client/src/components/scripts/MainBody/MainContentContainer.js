@@ -7,7 +7,7 @@ import ExpenseHistoryPage from '../ExpenseHistoryPage/ExpenseHistoryPage';
 import { Route, Switch } from 'react-router-dom';
 import '../../styles/MainBody/MainContentContainer.css';
 import Axios from 'axios';
-import {AuthContext} from '../../../Auth';
+import {app, AuthContext} from '../../../Auth';
 import LoadingMask from '../Common/LoadingMask';
 import Toast from 'react-bootstrap/Toast';
 import { Button } from 'react-bootstrap';
@@ -24,7 +24,8 @@ const OperationType = {
     DeleteTransactionSuccess: 9,
     DeleteTransactionFail: 10,
     GetMonthExpendituresByYearSuccess: 11,
-    GetMonthExpendituresByYearFail: 11
+    GetMonthExpendituresByYearFail: 12,
+    GetInitialDataFail: 13
 };
 
 const ToasterType = {
@@ -104,6 +105,9 @@ class MainContentContainer extends Component {
                     });
                 }
             }).catch(error => {
+                app.auth().signOut().then(result => {
+                    this.context.isUserSignedOut.current = true;
+                });
 
             });
 
@@ -119,7 +123,9 @@ class MainContentContainer extends Component {
                     });
                 }
             }).catch(error => {
-
+                app.auth().signOut().then(result => {
+                    this.context.isUserSignedOut.current = true;
+                });
             });
 
             Axios.get(getActiveYearsUrl, { withCredentials: true} ).then((response) => {
@@ -134,23 +140,26 @@ class MainContentContainer extends Component {
                     });
                 }
             }).catch(error => {
-
+                app.auth().signOut().then(result => {
+                    this.context.isUserSignedOut.current = true;
+                });
             });
         }
     }
     
     _updateCategoryStatuses(categoryStatuses) {
-        debugger;
         var updateCategoryStatusesUrl = process.env.REACT_APP_UPDATE_CATEGORY_STATUSES_URL;
 
         if (updateCategoryStatusesUrl) {
-            var monthExpenditureId = this.state.activeMonthExpenditure.monthExpenditureId;
+
+            this.setState({
+                showLoadingMask: true
+            });
 
             Axios.post(updateCategoryStatusesUrl, categoryStatuses, {
                 withCredentials: true
             }).then(response => {
                 if (response.data && response.data.success) {
-                    debugger;
                     var result = response.data.result;
                     var activeMonthExpenditure = this.state.activeMonthExpenditure;
                     activeMonthExpenditure.categoryExpenses = result.categoryExpenses;
@@ -160,36 +169,42 @@ class MainContentContainer extends Component {
                         categoryStatuses: result.categoryStatuses,
                         toasterText: ToasterMessages[OperationType.UpdateCategoryStatusesSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.UpdateCategoryStatusesFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.UpdateCategoryStatusesFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             })
         }
     }
 
     _updateCategoryExpenseBudgetLimits(updatedCategoryExpense) {
-        debugger;
         var updateCategoryExpenseBudgetLimitsUrl = process.env.REACT_APP_UPDATE_CATEGORY_EXPENSE_BUDGET_LIMITS_URL;
 
         if (updateCategoryExpenseBudgetLimitsUrl) {
+
+            this.setState({
+                showLoadingMask: true
+            });
+
             Axios.post(updateCategoryExpenseBudgetLimitsUrl, updatedCategoryExpense, {
                 withCredentials: true
             }).then(response => {
                 if (response.data && response.data.success) {
-                    debugger;
                     var result = response.data.result;
                     var activeMonthExpenditure = this.state.activeMonthExpenditure;
 
@@ -205,21 +220,24 @@ class MainContentContainer extends Component {
                         activeMonthExpenditure: activeMonthExpenditure,
                         toasterText: ToasterMessages[OperationType.UpdateCategoryExpenseBudgetLimitsSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.UpdateCategoryExpenseBudgetLimitsFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.UpdateCategoryExpenseBudgetLimitsFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             })
         }
@@ -229,6 +247,11 @@ class MainContentContainer extends Component {
         var addTransactionUrl = process.env.REACT_APP_ADD_TRANSACTION_URL;
 
         if (addTransactionUrl) {
+
+            this.setState({
+                showLoadingMask: true
+            });
+
             Axios.post(addTransactionUrl, {}, {
                 params: {
                     categoryExpenseId: transaction.categoryExpenseId,
@@ -254,21 +277,24 @@ class MainContentContainer extends Component {
                         activeMonthExpenditure: activeMonthExpenditure,
                         toasterText: ToasterMessages[OperationType.AddTransactionSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.AddTransactionFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.AddTransactionFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             })
         }
@@ -278,6 +304,11 @@ class MainContentContainer extends Component {
         var updateTransactionUrl = process.env.REACT_APP_UPDATE_TRANSACTION_URL;
 
         if (updateTransactionUrl) {
+
+            this.setState({
+                showLoadingMask: true
+            });
+
             Axios.post(updateTransactionUrl, transaction, {
                     withCredentials: true
             }).then((response) => {
@@ -297,21 +328,24 @@ class MainContentContainer extends Component {
                         activeMonthExpenditure: activeMonthExpenditure,
                         toasterText: ToasterMessages[OperationType.UpdateTransactionSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.UpdateTransactionFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.UpdateTransactionFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             })
         }
@@ -321,6 +355,11 @@ class MainContentContainer extends Component {
         var deleteTransactionUrl = process.env.REACT_APP_DELETE_TRANSACTION_URL;
 
         if (deleteTransactionUrl) {
+
+            this.setState({
+                showLoadingMask: true
+            });
+
             Axios.post(deleteTransactionUrl, transaction, {
                 withCredentials: true
             }).then((response) => {
@@ -340,21 +379,24 @@ class MainContentContainer extends Component {
                         activeMonthExpenditure: activeMonthExpenditure,
                         toasterText: ToasterMessages[OperationType.DeleteTransactionSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.DeleteTransactionFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.DeleteTransactionFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             })
         }
@@ -364,6 +406,11 @@ class MainContentContainer extends Component {
         var getMonthExpendituresByYearUrl = process.env.REACT_APP_GET_MONTH_EXPENDITURES_BY_YEAR_URL;
 
         if (getMonthExpendituresByYearUrl) {
+
+            this.setState({
+                showLoadingMask: true
+            });
+
             Axios.get(getMonthExpendituresByYearUrl, { 
                 params: {
                     year: year
@@ -377,21 +424,24 @@ class MainContentContainer extends Component {
                         monthExpenditures: result,
                         toasterText: ToasterMessages[OperationType.GetMonthExpendituresByYearSuccess],
                         showToaster: true,
-                        toasterType: ToasterType.Success
+                        toasterType: ToasterType.Success,
+                        showLoadingMask: false
                     });
                 }
                 else {
                     this.setState({
                         toasterText: ToasterMessages[OperationType.GetMonthExpendituresByYearFail],
                         showToaster: true,
-                        toasterType: ToasterType.Error
+                        toasterType: ToasterType.Error,
+                        showLoadingMask: false
                     });
                 }
             }).catch(error => {
                 this.setState({
                     toasterText: ToasterMessages[OperationType.GetMonthExpendituresByYearFail],
                     showToaster: true,
-                    toasterType: ToasterType.Error
+                    toasterType: ToasterType.Error,
+                    showLoadingMask: false
                 });
             });
         }

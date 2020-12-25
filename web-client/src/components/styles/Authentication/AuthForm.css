@@ -7,7 +7,7 @@
     box-shadow: 8px 8px 12px 0px var(--dark-grey); /*#393939*/
     background-color: var(--milk-white); /*#393939*/
     width: 35vw;
-    height: 75vh;
+    height: 80vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -25,6 +25,10 @@
     margin-bottom: 2.5rem;
     position: relative;
     width: 50%;
+}
+
+.auth-form .width-48 {
+    width: 48%;
 }
 
 .auth-form .authentication-field {
@@ -107,10 +111,16 @@
 }
 
 .auth-form .auth-button:hover {
-    opacity: 90%;
+    opacity: 0.9;
 }
 
 .auth-form .auth-error-alert {
     position: fixed;
     top: 5rem;
+}
+
+.auth-form .flex-row {
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
 }

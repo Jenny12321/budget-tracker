@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { Link, Redirect, withRouter } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import '../../styles/Authentication/AuthForm.css';
+import LoadingMask from '../Common/LoadingMask';
 
 class LoginForm extends Component {
 
@@ -17,7 +18,8 @@ class LoginForm extends Component {
             email: "",
             password: "",
             errorMessage: "",
-            showErrorAlert: false
+            showErrorAlert: false,
+            showLoadingMask: false
         };
 
         this.userNameRef = React.createRef();
@@ -40,17 +42,11 @@ class LoginForm extends Component {
         }
         else {
             this.setState({
-                showErrorAlert: false
+                showErrorAlert: false,
+                showLoadingMask: true
             });
 
-            app.auth().signInWithEmailAndPassword(email, password).then((result) => {
-                this.setState({
-                    errorMessage: "",
-                    showErrorAlert: false,
-                    email: "",
-                    password: ""
-                });
-                
+            app.auth().signInWithEmailAndPassword(email, password).then((result) => {                
                 this._onUsernameChange();
                 this._onPasswordChange();
             }).catch((error) => {
@@ -59,7 +55,8 @@ class LoginForm extends Component {
                 this.setState({
                     errorMessage: errorMsg,
                     showErrorAlert: true,
-                    password: ""
+                    password: "",
+                    showLoadingMask: false
                 });
 
                 this._onPasswordChange();
@@ -110,13 +107,14 @@ class LoginForm extends Component {
     }
 
     render() {
-        var { email, password, showErrorAlert, errorMessage } = this.state;
+        var { email, password, showErrorAlert, errorMessage, showLoadingMask } = this.state;
 
         if (this.context.currentUser && this.context.isUserAuthenticated) {
             return (<Redirect to="/authenticated/home"></Redirect>);
         }
         return (
             <div>
+                <LoadingMask show={showLoadingMask}/>
                 <form className="auth-form" onSubmit={this._onSubmit}>
                     <div className="auth-error-alert">
                         <Alert show={showErrorAlert} variant='danger'>{errorMessage}</Alert>

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import {app, AuthContext} from '../../../Auth';
 import Button from 'react-bootstrap/Button';
 import { Link, Redirect, withRouter } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 import '../../styles/Authentication/AuthForm.css';
+import LoadingMask from '../Common/LoadingMask';
 
 class RegistrationForm extends Component {
 
@@ -19,7 +21,10 @@ class RegistrationForm extends Component {
             firstName: "",
             lastName: "",
             password: "",
-            passwordReEnter: ""
+            passwordReEnter: "",
+            errorMessage: "",
+            showErrorAlert: false,
+            showLoadingMask: false
         };
 
         this.authFormRef = React.createRef();
@@ -95,9 +100,7 @@ class RegistrationForm extends Component {
 
         if (hasNoInvalidations) {
             this.setState({
-                email: "",
-                password: "",
-                passwordReEnter: ""
+                showLoadingMask: true
             });
 
             app.auth().createUserWithEmailAndPassword(email, password).then((result) => {
@@ -108,11 +111,16 @@ class RegistrationForm extends Component {
                 
                 this.context.isNewUser.current = result.additionalUserInfo.isNewUser;
                 this.context.currentUserInfo.current = newUserInfo;
+            }).catch((error) => {
+                if (error) {
+                    var errorMsg = (error.message) ? error.message : "An error has occurred. Please try again.";
 
-                this.setState({
-                    firstName: "",
-                    lastName: ""
-                });
+                    this.setState({
+                        errorMessage: errorMsg,
+                        showErrorAlert: true,
+                        showLoadingMask: false
+                    });
+                }
             });
         }
     }
@@ -216,7 +224,7 @@ class RegistrationForm extends Component {
     }
 
     render() {
-        var { email, firstName, lastName, password, passwordReEnter } = this.state;
+        var { email, firstName, lastName, password, passwordReEnter, showLoadingMask, showErrorAlert, errorMessage } = this.state;
 
         if (this.context.currentUser && this.context.isUserAuthenticated) {
             return (<Redirect to="/authenticated/home"></Redirect>);
@@ -224,27 +232,35 @@ class RegistrationForm extends Component {
 
         return (
             <div>
+                <LoadingMask show={showLoadingMask}/>
                 <form ref={this.authFormRef} id="auth-form" className="auth-form" onSubmit={this._onSubmit}>
+                    <div className="auth-error-alert">
+                        <Alert show={showErrorAlert} variant='danger'>{errorMessage}</Alert>
+                    </div>
                     <div className="auth-title">Sign Up</div>
                     <div className="authentication-content">
                         <input ref={this.userNameRef} id="username" className="authentication-field username-field" type="email" value={email} onChange={this._onUsernameChange} autoComplete="off" required />
-                        <span data-placeholder="Username" />
+                        <span data-placeholder="Email" />
                     </div>
-                    <div className="authentication-content">
-                        <input ref={this.firstNameRef} id="firstname" className="authentication-field firstname-field" type="text" value={firstName} onChange={this._onFirstNameChange} autoComplete="off" required />
-                        <span data-placeholder="First Name" />
+                    <div className="flex-row">
+                        <div className="authentication-content width-48">
+                            <input ref={this.firstNameRef} id="firstname" className="authentication-field firstname-field" type="text" value={firstName} onChange={this._onFirstNameChange} autoComplete="off" required />
+                            <span data-placeholder="First Name" />
+                        </div>
+                        <div className="authentication-content width-48">
+                            <input ref={this.lastNameRef} id="lastname" className="authentication-field lastname-field" type="text" value={lastName} onChange={this._onLastNameChange} autoComplete="off" required />
+                            <span data-placeholder="Last Name" />
+                        </div>
                     </div>
-                    <div className="authentication-content">
-                        <input ref={this.lastNameRef} id="lastname" className="authentication-field lastname-field" type="text" value={lastName} onChange={this._onLastNameChange} autoComplete="off" required />
-                        <span data-placeholder="Last Name" />
-                    </div>
-                    <div className="authentication-content">
-                        <input ref={this.passwordRef} id="password" className="authentication-field password-field" type="password" value={password} onChange={this._onPasswordChange} autoComplete="off" minLength={8} required />
-                        <span data-placeholder="Password" />
-                    </div>
-                    <div className="authentication-content">
-                        <input ref={this.passwordReEnterRef} id="password-reenter" className="authentication-field password-reenter-field" type="password" value={passwordReEnter} onChange={this._onPasswordReEnterChange} autoComplete="off" required />
-                        <span data-placeholder="Re-enter Password" />
+                    <div className="flex-row">
+                        <div className="authentication-content width-48">
+                            <input ref={this.passwordRef} id="password" className="authentication-field password-field" type="password" value={password} onChange={this._onPasswordChange} autoComplete="off" minLength={8} required />
+                            <span data-placeholder="Password" />
+                        </div>
+                        <div className="authentication-content width-48">
+                            <input ref={this.passwordReEnterRef} id="password-reenter" className="authentication-field password-reenter-field" type="password" value={passwordReEnter} onChange={this._onPasswordReEnterChange} autoComplete="off" required />
+                            <span data-placeholder="Re-enter Password" />
+                        </div>
                     </div>
                     <Button className="auth-button" size="lg" type="submit">Register</Button>
                     <div className="redirect-content">

@@ -84,7 +84,6 @@ class ExpenseHistoryPage extends Component {
     }
 
     _onSelect(eventKey) {
-        debugger;
         var { availableYears, getMonthExpendituresByYear } = this.props;
         var { allMonthExpenditures, yearsFetched, selectedYear } = this.state;
 
