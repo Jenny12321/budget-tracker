@@ -154,8 +154,7 @@ namespace BudgetTracker.BL
             CookieOptions cookieOptions = new CookieOptions()
             {
                 Secure = true,
-                //Domain = "127.0.0.1:3000", // Remove in future
-                //HttpOnly = true,
+                HttpOnly = true,
                 IsEssential = true,
                 SameSite = SameSiteMode.None,
                 Expires = DateTimeOffset.UtcNow.AddMinutes(75)
