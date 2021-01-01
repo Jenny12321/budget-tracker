@@ -15,10 +15,15 @@
     background-color: var(--milk-white); /*#F2F2F2*/
 }
 
-.sidebar .logo {
+.sidebar .logo-div {
     padding: 3rem 1rem;
     text-align: center;
     font-size: 2rem;
+}
+
+.sidebar .logo {
+    width: 100%;
+    padding: 0 1rem;
 }
 
 .sidebar .logout {

@@ -4,6 +4,7 @@ import {app, AuthContext} from '../../../Auth';
 import '../../styles/SideBar/SideBar.css';
 import SideBarUser from './SideBarUser';
 import SideBarNavigation from './SideBarNavigation';
+import Logo from '../../../res/logo/logo.png';
 
 class SideBar extends Component {
 
@@ -30,8 +31,8 @@ class SideBar extends Component {
         return (
             <div className="sidebar">
                 <div className="sidebar-content">
-                    <div className="logo">
-                        Xpense
+                    <div className="logo-div">
+                        <img className="logo" src={Logo} />
                     </div>
                     <SideBarUser />
                     <SideBarNavigation />
