@@ -124,3 +124,11 @@
     justify-content: space-between;
     width: 50%;
 }
+
+.cookie-consent-banner {
+    background: var(--dark-grey) !important;
+}
+
+.cookie-consent-banner-button {
+    border-radius: 0.4rem !important;
+}

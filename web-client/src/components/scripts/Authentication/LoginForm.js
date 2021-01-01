@@ -6,6 +6,7 @@ import { Link, Redirect, withRouter } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import '../../styles/Authentication/AuthForm.css';
 import LoadingMask from '../Common/LoadingMask';
+import CookieConsent from "react-cookie-consent";
 
 class LoginForm extends Component {
 
@@ -115,6 +116,7 @@ class LoginForm extends Component {
         return (
             <div>
                 <LoadingMask show={showLoadingMask}/>
+                <CookieConsent containerClasses="cookie-consent-banner" buttonClasses="cookie-consent-banner-button" buttonText="I Understand">This website requires cookies to function properly. Please enable all cookies before proceding. Thank you.</CookieConsent>
                 <form className="auth-form" onSubmit={this._onSubmit}>
                     <div className="auth-error-alert">
                         <Alert show={showErrorAlert} variant='danger'>{errorMessage}</Alert>
