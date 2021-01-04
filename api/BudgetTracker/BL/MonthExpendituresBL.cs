@@ -149,11 +149,20 @@ namespace BudgetTracker.BL
             DateTime effectiveDate = new DateTime(year, month, 1);
             MonthExpenditure newMonthExpenditure = _monthExpenditureDAL.CreateMonthExpenditureByYearAndMonth(userId, effectiveDate);
 
+            CategoryData categoryData = _categoryExpensesDAL.GetCategoryData(userId);
             var categories = Enum.GetValues(typeof(Category)).Cast<Category>();
+            var categoryDataDictionary = categoryData.GetType().GetProperties().ToDictionary(prop => prop.Name, prop => prop.GetValue(categoryData, null));
 
             foreach (var category in categories)
             {
-                _categoryExpensesDAL.CreateCategoryExpense(userId, category, newMonthExpenditure.MonthExpenditureId);
+                string categoryName = Enum.GetName(typeof(Category), category);
+                bool isActive = (bool)categoryDataDictionary[categoryName];
+
+                // Only create category expenses for active categories
+                if (isActive)
+                {
+                    _categoryExpensesDAL.CreateCategoryExpense(userId, category, newMonthExpenditure.MonthExpenditureId);
+                }
             }
 
             return newMonthExpenditure;
