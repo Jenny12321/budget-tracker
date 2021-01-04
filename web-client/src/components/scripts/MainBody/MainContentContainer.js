@@ -134,6 +134,7 @@ class MainContentContainer extends Component {
                     this.hasInitiatedInitialDataFetchRef.current = false;
 
                     var result = response.data.result;
+                    result.sort((a,b) => { return b-a; }); // Sort years in descending order
 
                     this.setState({
                         availableYears: result
@@ -411,7 +412,7 @@ class MainContentContainer extends Component {
                 showLoadingMask: true
             });
 
-            Axios.get(getMonthExpendituresByYearUrl, { 
+            Axios.post(getMonthExpendituresByYearUrl, {}, {
                 params: {
                     year: year
                 },

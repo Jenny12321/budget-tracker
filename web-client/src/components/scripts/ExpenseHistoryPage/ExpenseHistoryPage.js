@@ -96,7 +96,7 @@ class ExpenseHistoryPage extends Component {
             // Else, make a get request
             if (isYearFetched) {
                 var newMonthExpendituresOnDisplay = allMonthExpenditures.filter(me => {
-                    var year = getYear(me.effectiveDate);
+                    var year = getYear((new Date(me.effectiveDate)));
                     return (year === newSelectedYear);
                 });
 
@@ -106,8 +106,10 @@ class ExpenseHistoryPage extends Component {
                 });
             }
             else {
+                yearsFetched.push(newSelectedYear);
                 this.setState({
-                    selectedYear: newSelectedYear
+                    selectedYear: newSelectedYear,
+                    yearsFetched: yearsFetched
                 });
     
                 getMonthExpendituresByYear(newSelectedYear);
@@ -149,7 +151,7 @@ class ExpenseHistoryPage extends Component {
         monthExpendituresOnDisplay.forEach(me => {
             var monthExpenditureMonth = (new Date(me.effectiveDate)).getMonth();
 
-            if (true || !me.isActive) {
+            if (!me.isActive) {
                 monthToMonthExpendituresMap[monthExpenditureMonth] = me;
             }
         });
