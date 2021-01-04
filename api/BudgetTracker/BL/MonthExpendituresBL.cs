@@ -3,6 +3,7 @@ using BudgetTracker.BL.Interfaces;
 using BudgetTracker.DAL.Interfaces;
 using BudgetTracker.DTOs;
 using BudgetTracker.Models;
+using BudgetTracker.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -147,6 +148,13 @@ namespace BudgetTracker.BL
         {
             DateTime effectiveDate = new DateTime(year, month, 1);
             MonthExpenditure newMonthExpenditure = _monthExpenditureDAL.CreateMonthExpenditureByYearAndMonth(userId, effectiveDate);
+
+            var categories = Enum.GetValues(typeof(Category)).Cast<Category>();
+
+            foreach (var category in categories)
+            {
+                _categoryExpensesDAL.CreateCategoryExpense(userId, category, newMonthExpenditure.MonthExpenditureId);
+            }
 
             return newMonthExpenditure;
         }
