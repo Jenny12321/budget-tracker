@@ -100,7 +100,7 @@ namespace BudgetTracker.BL
             bool success = false;
             IEnumerable<MonthExpenditureDto> mappedMonthExpenditures = null;
 
-            IEnumerable<MonthExpenditure> monthExpenditures = _monthExpenditureDAL.GetAllMonthExpenditures(userId).Where(e => e.EffectiveDate.Year == year);
+            List<MonthExpenditure> monthExpenditures = _monthExpenditureDAL.GetAllMonthExpenditures(userId).Where(e => e.EffectiveDate.Year == year).ToList();
 
             foreach (var monthExpenditure in monthExpenditures)
             {
