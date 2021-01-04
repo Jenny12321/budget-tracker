@@ -57,10 +57,10 @@ namespace BudgetTracker.BL
                 CreateMonthExpenditure(userId, DateTime.Now.Year, DateTime.Now.Month);
             }
 
-            List<MonthExpenditure> monthExpenditures = _monthExpenditureDAL.GetAllMonthExpenditures(userId).ToList();
+            List<MonthExpenditure> monthExpenditures = _monthExpenditureDAL.GetAllMonthExpenditures(userId).Where(e => e.EffectiveDate.Year == DateTime.Now.Year).ToList();
             
             // Only grab and map transactions and category expenses for current year of month expenditures
-            foreach (var monthExpenditure in monthExpenditures.Where(e => e.EffectiveDate.Year == DateTime.Now.Year))
+            foreach (var monthExpenditure in monthExpenditures)
             {
                 MapTransactionsAndCategoryExpensesToMonthExpenditure(monthExpenditure);
             }
