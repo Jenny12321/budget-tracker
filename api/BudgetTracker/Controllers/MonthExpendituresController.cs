@@ -48,12 +48,12 @@ namespace BudgetTracker.Controllers
         }
 
         /// <summary>
-        /// GET Request
+        /// POST Request
         /// <para>Get month expenditures by year</para>
         /// </summary>
         /// <param name="date">Year housed in a date string</param>
         /// <returns></returns>
-        [HttpGet("GetMonthExpendituresByYear")]
+        [HttpPost("GetMonthExpendituresByYear")]
         [Authorize]
         public ActionResult<DataResult> GetMonthExpendituresByYear(int year)
         {
