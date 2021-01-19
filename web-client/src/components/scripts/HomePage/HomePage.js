@@ -31,7 +31,7 @@ class HomePage extends Component {
                     {
                         NavigationItems && NavigationItems.map(navItem => {
                             if (navItem.renderOnHomePage) {
-                                return (<HomeNavigationItem key={`home-nav-${navItem.eventKey}`} icon={navItem.icon} title={navItem.homePageText} link={navItem.link} onClick={this._onClick} />)
+                                return (<HomeNavigationItem key={`home-nav-${navItem.eventKey}`} icon={navItem.icon} title={navItem.homePageText} link={navItem.link} isActive={navItem.isActive} onClick={this._onClick} />)
                             }
                         })
                     }

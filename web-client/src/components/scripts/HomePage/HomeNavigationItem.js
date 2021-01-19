@@ -8,6 +8,7 @@ class HomeNavigationItem extends Component {
         icon: PropTypes.string,
         link: PropTypes.string,
         title: PropTypes.string,
+        isActive: PropTypes.bool,
         onClick: PropTypes.func
     }
 
@@ -20,18 +21,18 @@ class HomeNavigationItem extends Component {
     }
 
     _onClick() {
-        var { onClick, link } = this.props;
+        var { onClick, link, isActive } = this.props;
 
-        if (link && onClick) {
+        if (isActive && link && onClick) {
             onClick(link);
         }
     }
 
     render() {
-        var { icon, title } = this.props;
+        var { icon, title, isActive } = this.props;
 
         return (
-            <div className={`home-navigation-item navigation-item-${title}`} onClick={this._onClick}>
+            <div className={`home-navigation-item ` + (isActive ? "navigation-item-active" : "navigation-item-inactive")} onClick={this._onClick}>
                 <div className="home-navigation-item-content">
                     <div className="navigation-item-icon">
                         <FontAwesomeIcon icon={icon} size="8x" />

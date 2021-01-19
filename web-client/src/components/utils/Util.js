@@ -153,7 +153,8 @@ export const NavigationItems = [
         text: "Home",
         eventKey: "home",
         icon: "home",
-        renderOnHomePage: false
+        renderOnHomePage: false,
+        isActive: true
     },
     {
         link: "/authenticated/expenses",
@@ -161,7 +162,8 @@ export const NavigationItems = [
         eventKey: "expenses",
         icon: "money-bill-wave",
         renderOnHomePage: true,
-        homePageText: "Manage Current Expenses"
+        homePageText: "Manage Current Expenses",
+        isActive: true
     },
     {
         link: "/authenticated/expense-history",
@@ -169,7 +171,8 @@ export const NavigationItems = [
         eventKey: "expense-history",
         icon: "history",
         renderOnHomePage: true,
-        homePageText: "View Previous Expenses"
+        homePageText: "View Previous Expenses",
+        isActive: true
     },
     {
         link: "/authenticated/categories",
@@ -177,7 +180,8 @@ export const NavigationItems = [
         eventKey: "categories",
         icon: "layer-group",
         renderOnHomePage: true,
-        homePageText: "Edit Available Categories"
+        homePageText: "Edit Available Categories",
+        isActive: true
     },
     {
         link: "/authenticated/myProfile",
@@ -185,7 +189,8 @@ export const NavigationItems = [
         eventKey: "myProfile",
         icon: "user-circle",
         renderOnHomePage: true,
-        homePageText: "Visit Your Profile"
+        homePageText: "Visit Your Profile",
+        isActive: false
     },
     /*
     {

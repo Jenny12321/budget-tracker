@@ -50,7 +50,10 @@ class SideBarNavigation extends Component {
                         NavigationItems && NavigationItems.map(function(navItem) {
                             var isActive = (navItem.eventKey === activeKey) ? true : false;
 
-                            return (<SideBarNavigationItem key={navItem.eventKey} link={navItem.link} text={navItem.text} eventKey={navItem.eventKey} onTabChange={this._onTabChange} isActive={isActive} icon={navItem.icon}></SideBarNavigationItem>);
+                            // Do not allow visit to My Profile yet --> Not complete package
+                            if (navItem.eventKey != "myProfile") {
+                                return (<SideBarNavigationItem key={navItem.eventKey} link={navItem.link} text={navItem.text} eventKey={navItem.eventKey} onTabChange={this._onTabChange} isActive={isActive} icon={navItem.icon}></SideBarNavigationItem>);
+                            }
                         }.bind(this))
                     }
                 </Nav>
