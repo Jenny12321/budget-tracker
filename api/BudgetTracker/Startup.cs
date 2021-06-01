@@ -108,7 +108,6 @@ namespace BudgetTracker
                 c.AddPolicy("AllowSpecificOrigin", options => 
                     options.AllowAnyMethod()
                            .AllowAnyHeader()
-                           .WithOrigins("https://*.budgettracker-be41a.firebaseapp.com", "https://budgettracker-be41a.firebaseapp.com", "http://*.budgettracker-be41a.firebaseapp.com", "http://budgettracker-be41a.firebaseapp.com")
                            .SetIsOriginAllowed(origin => true)
                            .AllowCredentials()
                            );
@@ -125,13 +124,13 @@ namespace BudgetTracker
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            // Add mock BLs
+            // Add BLs
             services.AddScoped<ITransactionsBL, TransactionsBL>();
             services.AddScoped<ICategoriesBL, CategoriesBL>();
             services.AddScoped<IMonthExpendituresBL, MonthExpendituresBL>();
             services.AddScoped<IUsersBL, UsersBL>();
 
-            // Add mock DALs
+            // Add DALs
             services.AddScoped<ITransactionsDAL, TransactionsDAL>();
             services.AddScoped<ICategoriesDAL, CategoryExpensesDAL>();
             services.AddScoped<IMonthExpendituresDAL, MonthExpendituresDAL>();
@@ -146,11 +145,11 @@ namespace BudgetTracker
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseCors("AllowSpecificOrigin");
+
+            app.UseHttpsRedirection();
 
             app.UseAuthentication();
 
