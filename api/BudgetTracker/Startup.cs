@@ -65,7 +65,7 @@ namespace BudgetTracker
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
 
-                    connectionStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb}";
+                    connectionStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};Pooling=true;SSL Mode=Require; Trust Server Certificate=True;";
                 }
 
                 opts.UseNpgsql(connectionStr);
@@ -141,11 +141,7 @@ namespace BudgetTracker
 
             app.UseRouting();
 
-            app.UseCors(c => c
-                            .SetIsOriginAllowed(origin => true)
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials());
+            app.UseCors(c => c.SetIsOriginAllowed(origin => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
 
             app.UseAuthorization();
 
