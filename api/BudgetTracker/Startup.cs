@@ -103,15 +103,7 @@ namespace BudgetTracker
                 };
             });
 
-            services.AddCors(c =>
-            {
-                c.AddPolicy("AllowSpecificOrigin", options => 
-                    options.AllowAnyMethod()
-                           .AllowAnyHeader()
-                           .SetIsOriginAllowed(origin => true)
-                           .AllowCredentials()
-                           );
-            });
+            services.AddCors();
 
             services.AddMvc();
 
@@ -145,13 +137,15 @@ namespace BudgetTracker
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseCors("AllowSpecificOrigin");
-
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
+            app.UseRouting();
+
+            app.UseCors(c => c
+                            .SetIsOriginAllowed(origin => true)
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials());
 
             app.UseAuthorization();
 
