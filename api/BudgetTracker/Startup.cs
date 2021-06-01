@@ -105,7 +105,13 @@ namespace BudgetTracker
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowSpecificOrigin", options => options.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
+                c.AddPolicy("AllowSpecificOrigin", options => 
+                    options.AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .WithOrigins("https://*.budgettracker-be41a.firebaseapp.com", "https://budgettracker-be41a.firebaseapp.com", "http://*.budgettracker-be41a.firebaseapp.com", "http://budgettracker-be41a.firebaseapp.com")
+                           .SetIsOriginAllowed(origin => true)
+                           .AllowCredentials()
+                           );
             });
 
             services.AddMvc();
